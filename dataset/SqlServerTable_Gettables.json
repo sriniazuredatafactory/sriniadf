@@ -1,0 +1,25 @@
+{
+	"name": "SqlServerTable_Gettables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "onpremiseSqlserver",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"sqltablename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": {
+				"value": "@dataset().sqltablename",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

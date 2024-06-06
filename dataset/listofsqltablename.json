@@ -1,0 +1,33 @@
+{
+	"name": "listofsqltablename",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "listofsqltablenamefilenamesame",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"tablefilename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().tablefilename",
+					"type": "Expression"
+				},
+				"folderPath": "SqlServerTable",
+				"container": "srinucontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
