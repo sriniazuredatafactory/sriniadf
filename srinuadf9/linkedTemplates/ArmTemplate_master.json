@@ -1,0 +1,126 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "srinuadf9"
+		},
+		"AzureBlobStorage1DYnamictables_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1DYnamictables'"
+		},
+		"AzureBlobStorageTargeet_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorageTargeet'"
+		},
+		"Azurebloblinkedservice_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Azurebloblinkedservice'"
+		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"listofsqltablenamefilenamesame_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'listofsqltablenamefilenamesame'"
+		},
+		"onpremiseSqlserver_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'onpremiseSqlserver'"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP-VV29I5FP"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "srinudb"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"onpremiseSqlserver_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP-VV29I5FP"
+		},
+		"onpremiseSqlserver_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "srinudb"
+		},
+		"onpremiseSqlserver_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "srinuadf9_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage1DYnamictables_connectionString": {
+						"value": "[parameters('AzureBlobStorage1DYnamictables_connectionString')]"
+					},
+					"AzureBlobStorageTargeet_connectionString": {
+						"value": "[parameters('AzureBlobStorageTargeet_connectionString')]"
+					},
+					"Azurebloblinkedservice_connectionString": {
+						"value": "[parameters('Azurebloblinkedservice_connectionString')]"
+					},
+					"listofsqltablenamefilenamesame_connectionString": {
+						"value": "[parameters('listofsqltablenamefilenamesame_connectionString')]"
+					},
+					"SqlServer1_password": {
+						"value": "[parameters('SqlServer1_password')]"
+					},
+					"onpremiseSqlserver_password": {
+						"value": "[parameters('onpremiseSqlserver_password')]"
+					},
+					"SqlServer1_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_server')]"
+					},
+					"SqlServer1_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_database')]"
+					},
+					"SqlServer1_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
+					},
+					"onpremiseSqlserver_properties_typeProperties_server": {
+						"value": "[parameters('onpremiseSqlserver_properties_typeProperties_server')]"
+					},
+					"onpremiseSqlserver_properties_typeProperties_database": {
+						"value": "[parameters('onpremiseSqlserver_properties_typeProperties_database')]"
+					},
+					"onpremiseSqlserver_properties_typeProperties_userName": {
+						"value": "[parameters('onpremiseSqlserver_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

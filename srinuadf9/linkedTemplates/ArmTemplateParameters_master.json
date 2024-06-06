@@ -1,0 +1,51 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "srinuadf9"
+		},
+		"AzureBlobStorage1DYnamictables_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorageTargeet_connectionString": {
+			"value": ""
+		},
+		"Azurebloblinkedservice_connectionString": {
+			"value": ""
+		},
+		"SqlServer1_password": {
+			"value": ""
+		},
+		"listofsqltablenamefilenamesame_connectionString": {
+			"value": ""
+		},
+		"onpremiseSqlserver_password": {
+			"value": ""
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"value": "LAPTOP-VV29I5FP"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"value": "srinudb"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"value": "sa"
+		},
+		"onpremiseSqlserver_properties_typeProperties_server": {
+			"value": "LAPTOP-VV29I5FP"
+		},
+		"onpremiseSqlserver_properties_typeProperties_database": {
+			"value": "srinudb"
+		},
+		"onpremiseSqlserver_properties_typeProperties_userName": {
+			"value": "sa"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
