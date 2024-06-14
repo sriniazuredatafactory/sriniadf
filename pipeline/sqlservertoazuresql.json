@@ -29,6 +29,44 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "empid",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "empid",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "empname",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "empname",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "empsal",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "empsal",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
