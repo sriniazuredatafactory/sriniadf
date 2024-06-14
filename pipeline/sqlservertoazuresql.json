@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlServerSource",
+						"type": "AzureSqlSource",
 						"sqlReaderQuery": "select * from emp",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
@@ -40,13 +40,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SqlServerTable2",
+						"referenceName": "AzureSqlTablecloudsql",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSqlTable1",
+						"referenceName": "AzureSqlTablecloudsql",
 						"type": "DatasetReference"
 					}
 				]
