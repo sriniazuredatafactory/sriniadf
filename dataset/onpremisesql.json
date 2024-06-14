@@ -1,0 +1,16 @@
+{
+	"name": "onpremisesql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "onpremiselink",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "emp"
+		}
+	}
+}
