@@ -11,6 +11,9 @@
 		"AzureBlobStorageTargeet_connectionString": {
 			"value": ""
 		},
+		"AzureSqlconnlin_password": {
+			"value": ""
+		},
 		"Azurebloblinkedservice_connectionString": {
 			"value": ""
 		},
@@ -22,6 +25,18 @@
 		},
 		"onpremiseSqlserver_password": {
 			"value": ""
+		},
+		"onpremiselink_password": {
+			"value": ""
+		},
+		"AzureSqlconnlin_properties_typeProperties_server": {
+			"value": "sriniazuresql.database.windows.net"
+		},
+		"AzureSqlconnlin_properties_typeProperties_database": {
+			"value": "SriniAzueSqlDB"
+		},
+		"AzureSqlconnlin_properties_typeProperties_userName": {
+			"value": "sriniazuresqladmin"
 		},
 		"SqlServer1_properties_typeProperties_server": {
 			"value": "LAPTOP-VV29I5FP"
@@ -39,6 +54,15 @@
 			"value": "srinudb"
 		},
 		"onpremiseSqlserver_properties_typeProperties_userName": {
+			"value": "sa"
+		},
+		"onpremiselink_properties_typeProperties_server": {
+			"value": "LAPTOP-VV29I5FP"
+		},
+		"onpremiselink_properties_typeProperties_database": {
+			"value": "srinudb"
+		},
+		"onpremiselink_properties_typeProperties_userName": {
 			"value": "sa"
 		}
 	}

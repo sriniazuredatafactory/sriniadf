@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorageTargeet'"
 		},
+		"AzureSqlconnlin_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlconnlin'"
+		},
 		"Azurebloblinkedservice_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Azurebloblinkedservice'"
@@ -30,6 +34,22 @@
 		"onpremiseSqlserver_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'onpremiseSqlserver'"
+		},
+		"onpremiselink_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'onpremiselink'"
+		},
+		"AzureSqlconnlin_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sriniazuresql.database.windows.net"
+		},
+		"AzureSqlconnlin_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "SriniAzueSqlDB"
+		},
+		"AzureSqlconnlin_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sriniazuresqladmin"
 		},
 		"SqlServer1_properties_typeProperties_server": {
 			"type": "string",
@@ -52,6 +72,18 @@
 			"defaultValue": "srinudb"
 		},
 		"onpremiseSqlserver_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"onpremiselink_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP-VV29I5FP"
+		},
+		"onpremiselink_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "srinudb"
+		},
+		"onpremiselink_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "sa"
 		}
@@ -105,6 +137,28 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('AzureBlobStorageTargeet_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlconnlin')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('AzureSqlconnlin_properties_typeProperties_server')]",
+					"database": "[parameters('AzureSqlconnlin_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('AzureSqlconnlin_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlconnlin_password')]"
+					}
 				}
 			},
 			"dependsOn": []
@@ -187,6 +241,24 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlconn')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlconnlin",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlconnlin')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/azureblobtarget')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -264,7 +336,6 @@
 					"database": "[parameters('SqlServer1_properties_typeProperties_database')]",
 					"encrypt": "mandatory",
 					"trustServerCertificate": false,
-					"hostNameInCertificate": "",
 					"authenticationType": "Windows",
 					"userName": "[parameters('SqlServer1_properties_typeProperties_userName')]",
 					"password": {
@@ -293,12 +364,39 @@
 					"database": "[parameters('onpremiseSqlserver_properties_typeProperties_database')]",
 					"encrypt": "mandatory",
 					"trustServerCertificate": false,
-					"hostNameInCertificate": "",
 					"authenticationType": "SQL",
 					"userName": "[parameters('onpremiseSqlserver_properties_typeProperties_userName')]",
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('onpremiseSqlserver_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/onpremiselink')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('onpremiselink_properties_typeProperties_server')]",
+					"database": "[parameters('onpremiselink_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('onpremiselink_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('onpremiselink_password')]"
 					}
 				},
 				"connectVia": {
@@ -436,6 +534,27 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/onpremisesql')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "onpremiselink",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "emp"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/onpremiselink')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/First')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -548,137 +667,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SqlServerTable1')]",
 				"[concat(variables('factoryId'), '/datasets/azureblobtarget')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/loadallsqlservertabletoazureblob')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "getlistoftables",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"sqlReaderQuery": "select name from sys.tables  where type='u'",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "SqlServerTable1",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"firstRowOnly": false
-						}
-					},
-					{
-						"name": "ForEach1",
-						"type": "ForEach",
-						"dependsOn": [
-							{
-								"activity": "getlistoftables",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('getlistoftables').output.value",
-								"type": "Expression"
-							},
-							"activities": [
-								{
-									"name": "sqlservertables",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "SqlServerSource",
-											"queryTimeout": "02:00:00",
-											"partitionOption": "None"
-										},
-										"sink": {
-											"type": "DelimitedTextSink",
-											"storeSettings": {
-												"type": "AzureBlobStorageWriteSettings"
-											},
-											"formatSettings": {
-												"type": "DelimitedTextWriteSettings",
-												"quoteAllText": true,
-												"fileExtension": ".txt"
-											}
-										},
-										"enableStaging": false,
-										"translator": {
-											"type": "TabularTranslator",
-											"typeConversion": true,
-											"typeConversionSettings": {
-												"allowDataTruncation": true,
-												"treatBooleanAsNumber": false
-											}
-										}
-									},
-									"inputs": [
-										{
-											"referenceName": "SqlServerTable_Gettables",
-											"type": "DatasetReference",
-											"parameters": {
-												"sqltablename": {
-													"value": "@item().name",
-													"type": "Expression"
-												}
-											}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "listofsqltablename",
-											"type": "DatasetReference",
-											"parameters": {
-												"tablefilename": {
-													"value": "@item().name",
-													"type": "Expression"
-												}
-											}
-										}
-									]
-								}
-							]
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2024-06-05T12:10:11Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SqlServerTable1')]",
-				"[concat(variables('factoryId'), '/datasets/SqlServerTable_Gettables')]",
-				"[concat(variables('factoryId'), '/datasets/listofsqltablename')]"
 			]
 		}
 	]
