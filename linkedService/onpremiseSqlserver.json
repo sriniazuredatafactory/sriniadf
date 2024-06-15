@@ -9,16 +9,12 @@
 			"database": "srinudb",
 			"encrypt": "mandatory",
 			"trustServerCertificate": false,
-			"hostNameInCertificate": "",
 			"authenticationType": "SQL",
 			"userName": "sa",
-			"password": {
-				"type": "SecureString",
-				"value": "**********"
-			}
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIwZjhiZDc0OS0yYjc2LTQ5YTUtOWM3Mi1iMDEzNjRjMWFhNWIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
-			"referenceName": "integrationRuntime1",
+			"referenceName": "integrationRuntime2",
 			"type": "IntegrationRuntimeReference"
 		}
 	}
