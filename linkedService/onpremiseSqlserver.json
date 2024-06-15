@@ -8,14 +8,10 @@
 			"server": "LAPTOP-VV29I5FP",
 			"database": "srinudb",
 			"encrypt": "mandatory",
-			"trustServerCertificate": false,
-			"hostNameInCertificate": "",
+			"trustServerCertificate": true,
 			"authenticationType": "SQL",
 			"userName": "sa",
-			"password": {
-				"type": "SecureString",
-				"value": "**********"
-			}
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJjOWJlYTkyMS0yYTgyLTQzNGMtOGY5My1mZWRlYjM5YjM4ZmUiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "integrationRuntime1",
